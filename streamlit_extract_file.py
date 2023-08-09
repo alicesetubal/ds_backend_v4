@@ -37,10 +37,10 @@ def check_password():
 
 
 if check_password():
-    st.header("Welcome to Extract File :smile:")
-    arquivo = st.file_uploader('Insira seu arquivo:', type=['csv', 'xlsx', 'pdf', 'txt', 'docx'])
+   st.header("Welcome to Extract File :smile:")
+   arquivo = st.file_uploader('Insira seu arquivo:', type=['csv', 'xlsx', 'pdf', 'txt', 'docx'])
     
-    if arquivo is not None:
+   if arquivo is not None:
         temp_folder= "temp"
         if not os.path.exists(temp_folder):
             os.makedirs(temp_folder)

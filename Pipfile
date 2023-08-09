@@ -9,6 +9,7 @@ textract = "*"
 streamlit = "*"
 pdf2image = "*"
 openpyxl = "*"
+pillow = "*"
 
 [dev-packages]
 
