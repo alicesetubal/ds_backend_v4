@@ -41,7 +41,13 @@ if check_password():
     arquivo = st.file_uploader('Insira seu arquivo:', type=['csv', 'xlsx', 'pdf', 'txt', 'docx'])
     
     if arquivo is not None:
-        with open(os.path.join("temp", arquivo.name), "wb") as f:
+        temp_folder= "temp"
+        if not os.path.exists(temp_folder)
+            os.makedirs(temp_folder)
+            
+        temp_filename = os.path.join(temp_folder, arquivo.name)
+        
+        with open(temp_filename, "wb") as f:
             f.write(arquivo.getbuffer())
         
         filename = os.path.join("temp", arquivo.name)
@@ -68,4 +74,4 @@ if check_password():
         st.header("O texto extraído foi:")
         st.code(texto)
         
-        os.remove(filename)
+        os.remove(temp_filename)
