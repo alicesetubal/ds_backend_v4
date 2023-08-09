@@ -42,7 +42,7 @@ if check_password():
     
     if arquivo is not None:
         temp_folder= "temp"
-        if not os.path.exists(temp_folder)
+        if not os.path.exists(temp_folder):
             os.makedirs(temp_folder)
             
         temp_filename = os.path.join(temp_folder, arquivo.name)
