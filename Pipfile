@@ -10,7 +10,7 @@ streamlit = "*"
 pdf2image = "*"
 openpyxl = "*"
 pillow = "*"
-
+poppler-utils = "*"
 [dev-packages]
 
 [requires]
