@@ -1,6 +1,6 @@
 import streamlit as st
-import textract
 import os
+from extract_file import TextExtractor 
 
 
 def check_password():
@@ -37,30 +37,29 @@ def check_password():
 
 
 if check_password():
-   st.header("Welcome to Extract File :smile:")
-   arquivo = st.file_uploader('Insira seu arquivo:', type=['csv', 'xlsx', 'pdf', 'txt', 'docx'])
+    st.header("Welcome to Extract File :smile:")
+    arquivo = st.file_uploader('Insira seu arquivo:', type=['csv', 'xlsx', 'pdf', 'txt', 'docx'])
     
-   if arquivo is not None:
+    if arquivo is not None:
         with open(os.path.join("temp", arquivo.name), "wb") as f:
             f.write(arquivo.getbuffer())
-            
+        
         filename = os.path.join("temp", arquivo.name)
-        file_extract_obj = textract.process(filename)
-      
+        
         if arquivo.type == 'text/csv':
-            texto = file_extract_obj.decode('utf-8')
+            texto = TextExtractor.extract_text_from_csv(filename)
       
         elif arquivo.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-            texto = file_extract_obj.decode('utf-8')
+            texto = TextExtractor.extract_text_from_xlsx(filename)
       
         elif arquivo.type == 'application/pdf':
-            texto = file_extract_obj.decode('utf-8')
+            texto = TextExtractor.extract_text_from_pdf(filename)
             
         elif arquivo.type == 'text/plain':
-            texto = file_extract_obj.decode('utf-8')
+            texto = TextExtractor.extract_text_from_file(filename, 'txt')
             
         elif arquivo.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-            texto = file_extract_obj.decode('utf-8')
+            texto = TextExtractor.extract_text_from_file(filename, 'docx')
         
         else:
             st.error("Tipo de arquivo não suportado.")
